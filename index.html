@@ -93,15 +93,134 @@
             border-radius: 10px;
             border: 2px solid #eaeaea;
         }
+
+        /* Styling für das Spiel */
+        .game-container {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            margin: 20px 0;
+            max-width: 90vw;
+            text-shadow: none;
+            /* Verhindert, dass der Text hier Schatten hat */
+        }
+
+        #game-board {
+            width: 300px;
+            height: 150px;
+            border: 2px dashed #d4a373;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+
+        #player {
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            font-size: 40px;
+            line-height: 1;
+        }
+
+        #obstacle {
+            position: absolute;
+            bottom: 0;
+            left: 300px;
+            font-size: 35px;
+            line-height: 1;
+            display: none;
+            /* Erst beim Start sichtbar */
+        }
+
+        /* Die Sprung-Animation */
+        .jump-anim {
+            animation: jump 0.5s linear;
+        }
+
+        @keyframes jump {
+            0% {
+                bottom: 0;
+            }
+
+            40% {
+                bottom: 80px;
+            }
+
+            50% {
+                bottom: 90px;
+            }
+
+            60% {
+                bottom: 80px;
+            }
+
+            100% {
+                bottom: 0;
+            }
+        }
+
+        /* Die Hindernis-Animation */
+        .move-anim {
+            animation: move 1.5s infinite linear;
+        }
+
+        @keyframes move {
+            0% {
+                left: 300px;
+            }
+
+            100% {
+                left: -50px;
+            }
+        }
+
+        #startBtn {
+            background-color: #d4a373;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        #startBtn:hover {
+            background-color: #e28743;
+        }
+
+        #scoreText {
+            margin: 10px 0 0 0;
+            font-weight: bold;
+            color: #4a4a4a;
+        }
     </style>
 </head>
 
 <body>
 
-    <h1 id="main-title">Countdown bis zu unserem großen Tag ❤️</h1>
+    <h1 id="main-title">Ready for take-off...</h1>
 
     <div id="countdown" class="countdown-container">
         Wird geladen...
+    </div>
+
+    <!-- Das Mini-Spiel -->
+    <div id="game-section" class="game-container">
+        <p style="margin: 0 0 10px 0; color: #e28743; font-weight: bold;">Übe schon mal für die Flitterwochen:</p>
+        <!-- Bei Klick oder Tippen auf dem Handy wird gesprungen -->
+        <div id="game-board" onclick="jump()" ontouchstart="jump(event)">
+            <div id="player">👰</div> <!-- Du kannst hier auch 🏃‍♀️ oder 🤵 eintragen -->
+            <div id="obstacle">🧳</div>
+        </div>
+        <p id="scoreText">Punkte: <span id="score">0</span></p>
+        <button onclick="startGame()" id="startBtn">Spiel starten</button>
     </div>
 
     <!-- Der versteckte Bereich für den Hochzeitstag -->
@@ -137,11 +256,12 @@
 
             // Anzeige aktualisieren
             document.getElementById("countdown").innerHTML =
-                days + " Tage " + hours + " Std " + minutes + " Min " + seconds + " Sek";
+                "T-" + days + " Tage " + hours + " Std " + minutes + " Min " + seconds + " Sek";
 
             // Wenn der Countdown bei 0 ankommt
             if (distance < 0) {
                 clearInterval(timer);
+                document.getElementById("game-section").style.display = "none";
                 document.getElementById("countdown").style.display = "none";
                 document.getElementById("main-title").style.display = "none";
 
@@ -149,6 +269,75 @@
                 document.getElementById("surprise-section").style.display = "block";
             }
         }, 1000);
+
+        // --- SPIEL LOGIK ---
+        const player = document.getElementById("player");
+        const obstacle = document.getElementById("obstacle");
+        const scoreElement = document.getElementById("score");
+        let isJumping = false;
+        let gameScore = 0;
+        let gameInterval;
+        let scoreInterval;
+
+        function jump(event) {
+            if (event) event.preventDefault(); // Verhindert Doppeltipp-Zoom auf dem Handy
+            if (isJumping || obstacle.style.display !== "block") return;
+
+            isJumping = true;
+            player.classList.add("jump-anim");
+
+            setTimeout(() => {
+                player.classList.remove("jump-anim");
+                isJumping = false;
+            }, 500);
+        }
+
+        // Man kann auch mit der Leertaste springen
+        document.addEventListener("keydown", function (event) {
+            if (event.code === "Space") {
+                jump();
+            }
+        });
+
+        function startGame() {
+            // Animationen zurücksetzen und starten
+            obstacle.style.display = "block";
+            obstacle.style.animation = "none";
+            setTimeout(() => obstacle.style.animation = "", 10);
+            obstacle.classList.add("move-anim");
+
+            gameScore = 0;
+            scoreElement.innerText = gameScore;
+
+            clearInterval(gameInterval);
+            clearInterval(scoreInterval);
+
+            // Punkte hochzählen
+            scoreInterval = setInterval(() => {
+                gameScore++;
+                scoreElement.innerText = gameScore;
+            }, 100);
+
+            // Auf Zusammenstoß (Kollision) prüfen
+            gameInterval = setInterval(() => {
+                let playerRect = player.getBoundingClientRect();
+                let obstacleRect = obstacle.getBoundingClientRect();
+
+                // Hitbox-Prüfung (etwas toleranter eingestellt, damit es nicht zu schwer ist)
+                if (
+                    playerRect.right - 15 > obstacleRect.left &&
+                    playerRect.left + 15 < obstacleRect.right &&
+                    playerRect.bottom > obstacleRect.top + 10
+                ) {
+                    // Zusammenstoß!
+                    obstacle.style.animation = "none";
+                    obstacle.style.display = "none";
+                    clearInterval(gameInterval);
+                    clearInterval(scoreInterval);
+                    alert("Autsch! Du hast " + gameScore + " Punkte erreicht. Noch ein Versuch?");
+                }
+            }, 10);
+        }
     </script>
 </body>
 
