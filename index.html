@@ -8,8 +8,6 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fdf6f5;
-            /* Leichtes, romantisches Rosé/Beige */
             color: #4a4a4a;
             text-align: center;
             padding: 50px 20px;
@@ -18,33 +16,43 @@
             align-items: center;
             justify-content: center;
             min-height: 80vh;
+            margin: 0;
+
+            /* Hier binden wir das Bild ein und machen es bildschirmfüllend */
+            background-image: url('hintergrundbild.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
 
         h1 {
-            color: #d4a373;
+            /* Ändert die Schriftfarbe auf Weiß und fügt einen weichen Schatten hinzu für perfekte Lesbarkeit auf jedem Bild */
+            color: #ffffff;
             font-size: 2.5rem;
             margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
         }
 
         .countdown-container {
             font-size: 2rem;
             font-weight: bold;
-            background: #fff;
+            /* Ein weißer Hintergrund mit 85% Sichtbarkeit, damit man das Foto noch leicht durchscheinen sieht */
+            background: rgba(255, 255, 255, 0.85);
             padding: 20px 40px;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
             margin: 30px 0;
             color: #e28743;
         }
 
-        /* Dieser Bereich ist unsichtbar, bis der Countdown abgelaufen ist */
         #surprise-section {
             display: none;
             max-width: 800px;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.90);
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             animation: fadeIn 2s;
         }
 
@@ -64,7 +72,6 @@
             font-style: italic;
             margin-bottom: 30px;
             white-space: pre-wrap;
-            /* Sorgt dafür, dass deine Zeilenumbrüche erhalten bleiben */
         }
 
         .tickets-img {
