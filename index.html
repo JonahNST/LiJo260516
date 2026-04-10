@@ -41,8 +41,10 @@
 
         /* Tauscht das Hintergrundbild aus, sobald die Klasse 'revealed' aktiv ist */
         body.revealed::before {
-            background-image: url('UebersichtMap.png');
-            /* Hier den Namen deines neuen Bildes eintragen */
+            background-image: url('map.png');
+            background-size: cover;
+            background-position: center center;
+            /* Zentriert das Bild */
         }
 
         h1 {
@@ -67,12 +69,47 @@
 
         #surprise-section {
             display: none;
-            max-width: 800px;
-            background: rgba(255, 255, 255, 0.90);
+            width: 80%;
+            /* Box nimmt 80% der Breite ein, damit Ränder für das Bild bleiben */
+            max-width: 700px;
+
+            /* Der magische Glas-Effekt (Glassmorphism) */
+            background: rgba(255, 255, 255, 0.4);
+            /* Sehr durchsichtiges Weiß */
+            backdrop-filter: blur(8px);
+            /* Macht den Hintergrund unscharf wie Milchglas */
+            -webkit-backdrop-filter: blur(8px);
+            /* Für Safari auf iPhones */
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            /* Ein feiner, heller Rand */
+
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             animation: fadeIn 2s;
+
+            /* Verhindert, dass der Glas-Kasten das Scrollen blockiert, falls der Text sehr lang ist */
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* Anpassung speziell für hochkante Handy-Bildschirme */
+        @media (max-width: 600px) {
+            #surprise-section {
+                width: 90%;
+                padding: 25px 15px;
+                /* Weniger dicker Rand auf dem Handy */
+            }
+
+            .vows-text {
+                font-size: 1.05rem;
+                /* Text minimal kleiner, damit mehr auf den Screen passt */
+            }
+
+            h1 {
+                font-size: 2rem;
+                /* Überschrift etwas kleiner */
+            }
         }
 
         @keyframes fadeIn {
@@ -264,12 +301,37 @@
     <div id="surprise-section">
         <h1 style="color: #e28743;">Wir haben es geschafft!</h1>
         <div class="vows-text">
-            Mein geliebter Schatz,
+            Alles Gute zum 0. Hochzeitstag!
+            Eine klitzekleine Überraschung kannst du (hoffentlich) im Hintergrund erkennen.
+            Das wird mit Sicherheit auch eine Herausforderungen für uns alle, aber ich bin mir sicher, dass wir das
+            meistern und es sich lohnen wird!
+            Ich freue mich auf jeden Fall sehr darauf und ich hoffe, du auch!
 
-            hier ist Platz für dein Ehegelübde.
-            Du kannst diesen Text im Code ganz einfach anpassen und deine persönlichen Worte einfügen.
+            Für den wahrscheinlichen Fall, dass du das meiste wieder vergessen hast, dass ich dir bei der Trauung gesagt
+            habe(n werde) - überhaupt kein Problem.
+            Hier kannst du einen Ausschnitt nochmal nachlesen:
 
-            Ich freue mich auf unsere gemeinsame Zukunft und unsere Flitterwochen!
+            Lore ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
+            Lore ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
+            Lore ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
+            Lore ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
+
         </div>
     </div>
 
@@ -326,7 +388,7 @@
             setTimeout(() => {
                 player.classList.remove("jump-anim");
                 isJumping = false;
-            }, 500);
+            }, 650);
         }
 
         // Man kann auch mit der Leertaste springen
