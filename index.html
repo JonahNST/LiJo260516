@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unser großer Tag</title>
+    <title>Ready for take-off</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -200,6 +200,17 @@
             font-weight: bold;
             color: #4a4a4a;
         }
+
+        .player-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            /* Macht das Bild zu einem perfekten Kreis */
+            object-fit: cover;
+            /* Verhindert, dass das Gesicht verzerrt wird */
+            border: 2px solid #d4a373;
+            /* Ein kleiner, passender Rahmen (optional) */
+        }
     </style>
 </head>
 
@@ -213,11 +224,20 @@
 
     <!-- Das Mini-Spiel -->
     <div id="game-section" class="game-container">
-        <p style="margin: 0 0 10px 0; color: #e28743; font-weight: bold;">Übe schon mal für die Flitterwochen:</p>
+        <p style="margin: 0 0 10px 0; color: #e28743; font-weight: bold;">Während du warten musst, kannst du dir hier
+            die
+            Zeit
+            vertreiben:</p>
         <!-- Bei Klick oder Tippen auf dem Handy wird gesprungen -->
         <div id="game-board" onclick="jump()" ontouchstart="jump(event)">
-            <div id="player">👰</div> <!-- Du kannst hier auch 🏃‍♀️ oder 🤵 eintragen -->
-            <div id="obstacle">🧳</div>
+            <!--<div id="player">👰</div>  Du kannst hier auch 🏃‍♀️ oder 🤵 eintragen -->
+            <div id="player">
+                <img src="avatar.png" alt="Spieler" class="player-img">
+            </div>
+            <!--<div id="obstacle">🧳</div> -->
+            <div id="obstacle">
+                <img src="obstacle.png" alt="Hindernis" class="player-img">
+            </div>
         </div>
         <p id="scoreText">Punkte: <span id="score">0</span></p>
         <button onclick="startGame()" id="startBtn">Spiel starten</button>
@@ -241,7 +261,7 @@
 
     <script>
         // 1. Trage hier euer Hochzeitsdatum ein (Format: YYYY-MM-DDTHH:MM:SS)
-        const weddingDate = new Date("2026-05-11T14:45:00").getTime();
+        const weddingDate = new Date("2026/05/11 14:45:00").getTime();
 
         // 2. Countdown jede Sekunde aktualisieren
         const timer = setInterval(function () {
@@ -300,6 +320,8 @@
         });
 
         function startGame() {
+            // Button-Fokus entfernen, damit die Leertaste nicht ständig das Spiel neu startet
+            document.getElementById("startBtn").blur();
             // Animationen zurücksetzen und starten
             obstacle.style.display = "block";
             obstacle.style.animation = "none";
