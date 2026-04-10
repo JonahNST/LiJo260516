@@ -76,6 +76,10 @@
         #surprise-section {
             display: none;
 
+            /* NEU: Flexibles Layout für Text und Spiel */
+            flex-direction: column;
+            gap: 20px;
+
             /* ÄNDERUNGEN FÜR DIE LINKS-PLATZIERUNG: */
             width: 45%;
             max-width: 600px;
@@ -146,6 +150,15 @@
             max-width: 90vw;
             text-shadow: none;
             /* Verhindert, dass der Text hier Schatten hat */
+        }
+
+        /* Diese Regel überschreibt das Design des Spiels NUR nach dem Countdown */
+        #surprise-section .game-container {
+            background: transparent;
+            box-shadow: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+            /* Nur etwas Abstand nach oben zum Text */
         }
 
         #game-board {
@@ -353,13 +366,18 @@
             // Wenn der Countdown bei 0 ankommt
             if (distance < 0) {
                 clearInterval(timer);
-                document.getElementById("game-section").style.display = "none";
                 document.getElementById("countdown").style.display = "none";
                 document.getElementById("main-title").style.display = "none";
 
-                // Überraschung einblenden
-                document.getElementById("surprise-section").style.display = "block";
-                // NEU: Das Hintergrundbild auf das gesamte Fenster ändern!
+                // Die Überraschungs-Box einblenden (als Flex-Container)
+                const surpriseBox = document.getElementById("surprise-section");
+                surpriseBox.style.display = "flex";
+
+                // NEU: Wir verschieben das Spiel GANZ nach unten in die Überraschungs-Box
+                const gameBox = document.getElementById("game-section");
+                surpriseBox.appendChild(gameBox);
+
+                // Das Hintergrundbild auf das gesamte Fenster ändern
                 document.body.classList.add("revealed");
             }
         }, 1000);
