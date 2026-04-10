@@ -208,6 +208,17 @@
         }
 
         .player-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            /* Macht das Bild zu einem perfekten Kreis */
+            object-fit: cover;
+            /* Verhindert, dass das Gesicht verzerrt wird */
+            border: 2px solid #d4a373;
+            /* Ein kleiner, passender Rahmen (optional) */
+        }
+
+        .obstacle-img {
             width: 45px;
             height: 45px;
             border-radius: 50%;
@@ -242,7 +253,7 @@
             </div>
             <!--<div id="obstacle">🧳</div> -->
             <div id="obstacle">
-                <img src="obstacle.png" alt="Hindernis" class="player-img">
+                <img src="obstacle.png" alt="Hindernis" class="obstacle-img">
             </div>
         </div>
         <p id="scoreText">Punkte: <span id="score">0</span></p>
