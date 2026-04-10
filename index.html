@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,8 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fdf6f5; /* Leichtes, romantisches Rosé/Beige */
+            background-color: #fdf6f5;
+            /* Leichtes, romantisches Rosé/Beige */
             color: #4a4a4a;
             text-align: center;
             padding: 50px 20px;
@@ -30,7 +32,7 @@
             background: #fff;
             padding: 20px 40px;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             margin: 30px 0;
             color: #e28743;
         }
@@ -42,13 +44,18 @@
             background: #fff;
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             animation: fadeIn 2s;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .vows-text {
@@ -56,7 +63,8 @@
             line-height: 1.6;
             font-style: italic;
             margin-bottom: 30px;
-            white-space: pre-wrap; /* Sorgt dafür, dass deine Zeilenumbrüche erhalten bleiben */
+            white-space: pre-wrap;
+            /* Sorgt dafür, dass deine Zeilenumbrüche erhalten bleiben */
         }
 
         .tickets-img {
@@ -67,10 +75,11 @@
         }
     </style>
 </head>
+
 <body>
 
     <h1 id="main-title">Countdown bis zu unserem großen Tag ❤️</h1>
-    
+
     <div id="countdown" class="countdown-container">
         Wird geladen...
     </div>
@@ -79,47 +88,48 @@
     <div id="surprise-section">
         <h1 style="color: #e28743;">Wir haben es geschafft!</h1>
         <div class="vows-text">
-Mein geliebter Schatz,
+            Mein geliebter Schatz,
 
-hier ist Platz für dein Ehegelübde. 
-Du kannst diesen Text im Code ganz einfach anpassen und deine persönlichen Worte einfügen.
+            hier ist Platz für dein Ehegelübde.
+            Du kannst diesen Text im Code ganz einfach anpassen und deine persönlichen Worte einfügen.
 
-Ich freue mich auf unsere gemeinsame Zukunft und unsere Flitterwochen!
+            Ich freue mich auf unsere gemeinsame Zukunft und unsere Flitterwochen!
         </div>
-        
+
         <!-- Das Bild der Flugtickets -->
         <img src="flugtickets.jpg" alt="Unsere Flitterwochen Tickets" class="tickets-img">
     </div>
 
     <script>
         // 1. Trage hier euer Hochzeitsdatum ein (Format: YYYY-MM-DDTHH:MM:SS)
-        const weddingDate = new Date("2026-08-15T12:00:00").getTime();
+        const weddingDate = new Date("2026-04-10T11:45:00").getTime();
 
         // 2. Countdown jede Sekunde aktualisieren
-        const timer = setInterval(function() {
+        const timer = setInterval(function () {
             const now = new Date().getTime();
             const distance = weddingDate - now;
-            
+
             // Zeitberechnungen
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
+
             // Anzeige aktualisieren
-            document.getElementById("countdown").innerHTML = 
+            document.getElementById("countdown").innerHTML =
                 days + " Tage " + hours + " Std " + minutes + " Min " + seconds + " Sek";
-            
+
             // Wenn der Countdown bei 0 ankommt
             if (distance < 0) {
-                clearInterval(timer); 
+                clearInterval(timer);
                 document.getElementById("countdown").style.display = "none";
                 document.getElementById("main-title").style.display = "none";
-                
+
                 // Überraschung einblenden
                 document.getElementById("surprise-section").style.display = "block";
             }
         }, 1000);
     </script>
 </body>
+
 </html>
