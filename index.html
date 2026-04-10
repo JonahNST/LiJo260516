@@ -15,14 +15,27 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 80vh;
+            /* Nutzt dynamische Höhe für Handys, damit die Adresszeile das Bild nicht verschiebt */
+            min-height: 100dvh;
             margin: 0;
+        }
 
-            /* Hier binden wir das Bild ein und machen es bildschirmfüllend */
+        /* Das ist der neue Trick für ein perfektes Hintergrundbild auf allen Geräten */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            /* Legt das Bild in den Hintergrund */
+
             background-image: url('hintergrundbild.jpg');
             background-size: cover;
+
+            /* Wichtig: Hier steuerst du den Fokus des Bildes! */
             background-position: center center;
-            background-attachment: fixed;
             background-repeat: no-repeat;
         }
 
