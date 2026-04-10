@@ -208,8 +208,8 @@
         }
 
         .player-img {
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             /* Macht das Bild zu einem perfekten Kreis */
             object-fit: cover;
@@ -219,8 +219,8 @@
         }
 
         .obstacle-img {
-            width: 45px;
-            height: 45px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             /* Macht das Bild zu einem perfekten Kreis */
             object-fit: cover;
@@ -363,9 +363,9 @@
 
                 // Hitbox-Prüfung (etwas toleranter eingestellt, damit es nicht zu schwer ist)
                 if (
-                    playerRect.right - 20 > obstacleRect.left &&
-                    playerRect.left + 20 < obstacleRect.right &&
-                    playerRect.bottom > obstacleRect.top + 15
+                    playerRect.right - 25 > obstacleRect.left &&
+                    playerRect.left + 25 < obstacleRect.right &&
+                    playerRect.bottom > obstacleRect.top + 20
                 ) {
                     // Zusammenstoß!
                     obstacle.style.animation = "none";
