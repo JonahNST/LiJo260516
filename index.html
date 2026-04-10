@@ -363,9 +363,9 @@
 
                 // Hitbox-Prüfung (etwas toleranter eingestellt, damit es nicht zu schwer ist)
                 if (
-                    playerRect.right - 15 > obstacleRect.left &&
-                    playerRect.left + 15 < obstacleRect.right &&
-                    playerRect.bottom > obstacleRect.top + 10
+                    playerRect.right - 20 > obstacleRect.left &&
+                    playerRect.left + 20 < obstacleRect.right &&
+                    playerRect.bottom > obstacleRect.top + 15
                 ) {
                     // Zusammenstoß!
                     obstacle.style.animation = "none";
