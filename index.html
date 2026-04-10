@@ -75,26 +75,24 @@
 
         #surprise-section {
             display: none;
-            width: 80%;
-            /* Box nimmt 80% der Breite ein, damit Ränder für das Bild bleiben */
-            max-width: 700px;
 
-            /* Der magische Glas-Effekt (Glassmorphism) */
+            /* ÄNDERUNGEN FÜR DIE LINKS-PLATZIERUNG: */
+            width: 45%;
+            max-width: 600px;
+            margin-left: 5%;
+            margin-right: auto;
+            text-align: left;
+            /* Falls du den Text selbst auch linksbündig haben wolltest */
+
+            /* Dein bestehendes Glassmorphism-Design bleibt erhalten: */
             background: rgba(255, 255, 255, 0.4);
-            /* Sehr durchsichtiges Weiß */
             backdrop-filter: blur(8px);
-            /* Macht den Hintergrund unscharf wie Milchglas */
             -webkit-backdrop-filter: blur(8px);
-            /* Für Safari auf iPhones */
             border: 1px solid rgba(255, 255, 255, 0.6);
-            /* Ein feiner, heller Rand */
-
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             animation: fadeIn 2s;
-
-            /* Verhindert, dass der Glas-Kasten das Scrollen blockiert, falls der Text sehr lang ist */
             max-height: 80vh;
             overflow-y: auto;
         }
@@ -103,8 +101,10 @@
         @media (max-width: 600px) {
             #surprise-section {
                 width: 90%;
+                margin-left: auto;
+                /* Zwingt die Box auf dem Handy zurück in die Mitte */
+                margin-right: auto;
                 padding: 25px 15px;
-                /* Weniger dicker Rand auf dem Handy */
             }
 
             .vows-text {
@@ -134,13 +134,6 @@
             font-style: italic;
             margin-bottom: 30px;
             white-space: pre-wrap;
-        }
-
-        .tickets-img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            border: 2px solid #eaeaea;
         }
 
         /* Styling für das Spiel */
