@@ -10,7 +10,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #4a4a4a;
             text-align: center;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -86,6 +85,7 @@
             max-width: 600px;
             margin-left: 5%;
             margin-right: auto;
+            margin-top: 0;
             text-align: left;
             /* Falls du den Text selbst auch linksbündig haben wolltest */
 
@@ -110,6 +110,8 @@
                 /* Zwingt die Box auf dem Handy zurück in die Mitte */
                 margin-right: auto;
                 padding: 25px 15px;
+                margin-top: 100vh;
+                margin-bottom: 50px;
             }
 
             .vows-text {
@@ -382,7 +384,8 @@
                 gameBox.querySelector("p").style.display = "none";
 
                 // 2. Das Hindernis in ein Flugzeug verwandeln
-                document.getElementById("obstacle").innerHTML = "✈️";
+                document.getElementById("obstacle").innerHTML = "<img src='plane.png' alt='airplane' style='width: 55px; height: 55px;'>";
+
 
                 // 3. Den Spieler in zwei nebeneinanderliegende, runde Fotos verwandeln
                 document.getElementById("player").innerHTML = `
